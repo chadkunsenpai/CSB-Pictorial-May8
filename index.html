@@ -60,16 +60,28 @@
   </style>
 </head>
 <body>
-  <audio id="rickroll" autoplay loop>
-    <source src="https://www.myinstants.com/media/sounds/never-gonna-give-you-up-rickroll.mp3" type="audio/mpeg">
+  <audio id="rickroll" autoplay loop preload="auto" playsinline>
+    <source src="nggyu.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
   <pre id="ascii"></pre>
 
   <script>
-    // Ensure audio plays when user interacts with the page
-    document.addEventListener('click', function() {
-      document.getElementById('rickroll').play();
+    window.addEventListener('load', function() {
+      const audio = document.getElementById('rickroll');
+      
+      // Try to play audio as soon as possible
+      const playPromise = audio.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.catch(function(error) {
+          // Auto-play was prevented
+          // Show a "Play" button so that user can start playback
+          document.body.addEventListener('click', function() {
+            audio.play();
+          });
+        });
+      }
     });
 
     // Import frames from rick.go
