@@ -31,6 +31,23 @@
       justify-content: center;
       align-items: center;
     }
+    #rickButton {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 32px;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 100;
+    }
+    .hidden {
+      display: none !important;
+    }
 
     /* Dynamic font sizing based on viewport */
     @media screen and (max-width: 768px) {
@@ -60,28 +77,22 @@
   </style>
 </head>
 <body>
-  <audio id="rickroll" autoplay loop preload="auto" playsinline>
+  <audio id="rickroll" preload="auto" playsinline loop>
     <source src="nggyu.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
-  <pre id="ascii"></pre>
+  <button id="rickButton">Don't click me</button>
+  <pre id="ascii" class="hidden"></pre>
 
   <script>
-    window.addEventListener('load', function() {
-      const audio = document.getElementById('rickroll');
-      
-      // Try to play audio as soon as possible
-      const playPromise = audio.play();
-      
-      if (playPromise !== undefined) {
-        playPromise.catch(function(error) {
-          // Auto-play was prevented
-          // Show a "Play" button so that user can start playback
-          document.body.addEventListener('click', function() {
-            audio.play();
-          });
-        });
-      }
+    const button = document.getElementById('rickButton');
+    const ascii = document.getElementById('ascii');
+    const audio = document.getElementById('rickroll');
+    
+    button.addEventListener('click', function() {
+      button.classList.add('hidden');
+      ascii.classList.remove('hidden');
+      audio.play();
     });
 
     // Import frames from rick.go
@@ -1087,7 +1098,7 @@ ft11ttt11tttt1tt11i,:,.....,11i,i1i,1tt,,,.........,:i11111111t1tffttt
 ]
 
     let i = 0;
-    const fps = 15;
+    const fps = 12.5;
     setInterval(() => {
       document.getElementById('ascii').textContent = frames[i];
       i = (i + 1) % frames.length;
