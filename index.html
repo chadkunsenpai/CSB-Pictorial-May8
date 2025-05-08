@@ -1098,11 +1098,28 @@ ft11ttt11tttt1tt11i,:,.....,11i,i1i,1tt,,,.........,:i11111111t1tffttt
 ]
 
     let i = 0;
-    const fps = 12.5;
-    setInterval(() => {
-      document.getElementById('ascii').textContent = frames[i];
-      i = (i + 1) % frames.length;
-    }, 1000 / fps);
+    const fps = 14;
+    const frameElement = document.getElementById('ascii');
+    
+    // Use requestAnimationFrame for better performance
+    let lastFrameTime = 0;
+    const frameInterval = 1000 / fps;
+
+    function animate(timestamp) {
+      if (timestamp - lastFrameTime >= frameInterval) {
+        frameElement.textContent = frames[i];
+        i = (i + 1) % frames.length;
+        lastFrameTime = timestamp;
+      }
+      requestAnimationFrame(animate);
+    }
+
+    button.addEventListener('click', function() {
+      button.classList.add('hidden');
+      ascii.classList.remove('hidden');
+      audio.play();
+      requestAnimationFrame(animate);
+    });
   </script>
 </body>
 </html>
