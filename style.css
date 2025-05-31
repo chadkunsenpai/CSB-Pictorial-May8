@@ -256,4 +256,56 @@ body {
   display: none !important;
 }
 /* Remove tagline style since it's not used */
-.portfolio-tagline { display: none; } 
+.portfolio-tagline { display: none; }
+@media screen and (max-width: 600px) {
+  html, body {
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    min-width: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  .portfolio-intro {
+    min-height: 100vh;
+    padding: 0 0px;
+    width: 100vw;
+    box-sizing: border-box;
+  }
+  .portfolio-card {
+    min-width: 0;
+    width: 98vw;
+    max-width: 98vw;
+    padding: 24px 4vw 20px 4vw;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 16px;
+    border-width: 2px;
+  }
+  .portfolio-name {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    word-break: break-word;
+    text-align: center;
+    width: 100%;
+  }
+  .portfolio-details {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+    word-break: break-word;
+    text-align: center;
+    width: 100%;
+  }
+  #rickButton {
+    font-size: 1rem;
+    padding: 10px 0;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+} 
