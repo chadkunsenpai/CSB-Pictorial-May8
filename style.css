@@ -1,0 +1,259 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  background: black;
+  color: lime;
+  font-family: monospace;
+  white-space: pre;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#ascii {
+  margin: 0;
+  padding: 0;
+  transform-origin: center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#rickButton {
+  margin-top: 0px;
+  margin-bottom: 0;
+  width: auto;
+  max-width: none;
+  font-size: 1.08rem;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-weight: 700;
+  border-radius: 32px;
+  box-shadow: 0 2px 12px 0 rgba(31, 162, 255, 0.10);
+  background: linear-gradient(90deg, #1fa2ff 0%, #12d8fa 100%);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  transition: background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  outline: none;
+  display: block;
+  position: static;
+  margin-left: auto;
+  margin-right: auto;
+}
+#rickButton:hover, #rickButton:focus {
+  background: linear-gradient(90deg, #12d8fa 0%, #1fa2ff 100%);
+  box-shadow: 0 4px 24px 0 rgba(31, 162, 255, 0.18);
+}
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+#rickButton {
+  animation: gradientMove 3s ease infinite;
+}
+.hidden {
+  display: none !important;
+}
+/* Dynamic font sizing based on viewport */
+@media screen and (max-width: 768px) {
+  #ascii {
+    font-size: min(1.5vw, 1.5vh);
+  }
+}
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  #ascii {
+    font-size: min(1.8vw, 1.8vh);
+  }
+}
+@media screen and (min-width: 1025px) {
+  #ascii {
+    font-size: min(2vw, 2vh);
+  }
+}
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  #ascii {
+    font-size: min(1.2vw, 1.2vh);
+  }
+}
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.35);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+.modal {
+  background: rgba(255,255,255,0.18);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(31, 162, 255, 0.18);
+  border: 2px solid rgba(255,255,255,0.25);
+  padding: 32px 32px 24px 32px;
+  min-width: 320px;
+  color: #222;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 201;
+}
+.modal h2 {
+  margin: 0 0 24px 0;
+  font-size: 1.5rem;
+  color: #1fa2ff;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 16px;
+  flex-direction: row;
+  transition: flex-direction 0.2s;
+}
+.modal-btn {
+  padding: 10px 32px;
+  font-size: 1.1rem;
+  border-radius: 24px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(31, 162, 255, 0.10);
+}
+.modal-btn.yes {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+}
+.modal-btn.yes:hover, .modal-btn.yes:focus {
+  background: #219150;
+  color: #fff;
+  transform: scale(1.05);
+}
+.modal-btn.no {
+  background: #f2f2f2;
+  color: #888;
+  border: none;
+}
+.modal-btn.no:hover, .modal-btn.no:focus {
+  background: #e0e0e0;
+  color: #666;
+}
+.modal-btn.no.avoid {
+  position: absolute;
+  left: var(--no-x, 0);
+  top: var(--no-y, 0);
+  transition: left 0.2s, top 0.2s;
+}
+#loaderOverlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.85);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s;
+}
+.loader-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #1fa2ff33;
+  border-top: 4px solid #1fa2ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.loader-message {
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  font-size: 1.25rem;
+  color: #1fa2ff;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.portfolio-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(120deg, #f8fafc 0%, #e3f0ff 100%);
+  padding: 0 24px;
+  position: relative;
+  z-index: 10;
+  animation: fadeInIntro 1.2s cubic-bezier(.4,0,.2,1);
+}
+.portfolio-card {
+  background: rgba(255,255,255,0.95);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(31, 162, 255, 0.10), 0 1.5px 4px rgba(0,0,0,0.04);
+  padding: 40px 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+  max-width: 95vw;
+  margin: 0 auto;
+  animation: fadeInCard 1.2s cubic-bezier(.4,0,.2,1);
+}
+@keyframes fadeInCard {
+  from { opacity: 0; transform: scale(0.98) translateY(40px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 24px 0 rgba(31, 162, 255, 0.12);
+  margin-bottom: 24px;
+  border: 4px solid #fff;
+  background: #e3f0ff;
+}
+.portfolio-name {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1fa2ff;
+  margin: 0 0 12px 0;
+  letter-spacing: 1px;
+  text-align: center;
+  font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  transition: color 0.2s;
+}
+.portfolio-details {
+  font-size: 1.08rem;
+  color: #444;
+  margin-bottom: 24px;
+  text-align: center;
+  font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+}
+/* Hide intro when ASCII is shown */
+#ascii:not(.hidden) ~ #portfolioIntro,
+#ascii:not(.hidden) ~ #modalOverlay,
+#ascii:not(.hidden) ~ #rickButton {
+  display: none !important;
+}
+/* Remove tagline style since it's not used */
+.portfolio-tagline { display: none; } 
